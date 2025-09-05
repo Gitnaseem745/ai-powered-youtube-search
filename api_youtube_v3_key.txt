@@ -1,0 +1,11 @@
+AIzaSyCwomc2OO-sAAj9o5FrVTCkG2rS6atRzT0
+
+
+NEXT_YOUTUBE_API_KEY=AIzaSyCwomc2OO-sAAj9o5FrVTCkG2rS6atRzT0
+
+userQuery = input.value;
+
+const apiKey = process.env.NEXT_YOUTUBE_API_KEY;
+
+
+fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${userQuery}&maxResults=10&key=${apiKey}`)
