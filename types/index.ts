@@ -13,7 +13,6 @@ export interface VideoItem {
     channelTitle: string;
     publishedAt: string;
   };
-  relevanceScore?: number;
 }
 
 export interface SearchResponse {

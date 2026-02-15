@@ -76,7 +76,6 @@ app/
   globals.css         # Global styles
   api/
     search/route.ts   # POST /api/search — Gemini AI refinement + YouTube search
-    [transport]/      # AI tools endpoint (enhance-search, analyze-relevance)
 components/
   navigation.tsx      # Top navigation bar with Relevia branding
   hero.tsx            # Hero section + video results grid
@@ -100,7 +99,6 @@ lib/
 | Font | Poppins (via next/font) |
 | API | YouTube Data API v3 |
 | AI | Google Gemini 2.0 Flash |
-| AI Tools | Vercel MCP Adapter + Zod validation |
 | Icons | Lucide React |
 
 ## Deployment
