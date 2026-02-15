@@ -19,7 +19,7 @@ export interface VideoItem {
 export interface SearchResponse {
   items: VideoItem[];
   originalQuery: string;
-  enhancedQuery: string;
+  refinedQuery: string;
 }
 
 export interface HeroSectionProps {
@@ -27,4 +27,5 @@ export interface HeroSectionProps {
   search: string;
   setSearch: (search: string) => void;
   fetchData: () => Promise<void>;
+  refinedQuery: string;
 }

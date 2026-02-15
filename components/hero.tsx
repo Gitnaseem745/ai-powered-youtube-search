@@ -2,7 +2,7 @@ import Link from "next/link";
 import ChatInput from "./search-bar";
 import { HeroSectionProps } from "@/types";
 
-const HeroSection = ({ items, search, setSearch, fetchData }: HeroSectionProps) => {
+const HeroSection = ({ items, search, setSearch, fetchData, refinedQuery }: HeroSectionProps) => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-start pt-20 pb-12 px-4">
       <div className="w-full max-w-4xl mx-auto space-y-12">
@@ -19,6 +19,19 @@ const HeroSection = ({ items, search, setSearch, fetchData }: HeroSectionProps) 
         <div className="w-full max-w-2xl mx-auto">
           <ChatInput fetchData={fetchData} search={search} setSearch={setSearch} />
         </div>
+
+        {/* AI Refined Query Badge */}
+        {refinedQuery && refinedQuery !== search && (
+          <div className="flex items-center justify-center">
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2">
+              <svg className="w-4 h-4 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              <span className="text-white/60 text-sm">AI searched for:</span>
+              <span className="text-white font-medium text-sm">&quot;{refinedQuery}&quot;</span>
+            </div>
+          </div>
+        )}
 
         {/* List of Videos */}
         {items && items.length > 0 && (

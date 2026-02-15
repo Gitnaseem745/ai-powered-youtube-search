@@ -2,7 +2,7 @@ import { createMcpHandler } from "@vercel/mcp-adapter";
 import { z } from "zod";
 
 const handler = createMcpHandler(server => {
-    console.log("Initializing MCP server handlers...");
+    console.log("Initializing AI Video Finder server handlers...");
 
     // Tool for enhancing search queries
     server.tool(
@@ -12,9 +12,9 @@ const handler = createMcpHandler(server => {
             query: z.string()
         },
         ({ query }) => {
-            console.log("MCP: Received enhance-search request for query:", query);
+            console.log("AI Search: Received enhance-search request for query:", query);
             const enhancedQuery = `${query} tutorial`; // Simple enhancement example
-            console.log("MCP: Returning enhanced query:", enhancedQuery);
+            console.log("AI Search: Returning enhanced query:", enhancedQuery);
             return {
                 content: [
                     {
@@ -41,7 +41,7 @@ const handler = createMcpHandler(server => {
             query: z.string()
         },
         ({ video, query }) => {
-            console.log("MCP: Received analyze-relevance request for query:", query);
+            console.log("AI Search: Received analyze-relevance request for query:", query);
             const title = video.snippet?.title || '';
             const description = video.snippet?.description || '';
             const tags = video.snippet?.tags || [];
@@ -55,7 +55,7 @@ const handler = createMcpHandler(server => {
             if (tags.some((tag: string) => tag.toLowerCase().includes(queryLower))) score += 0.1;
             
             const finalScore = Math.min(score, 1.0);
-            console.log("MCP: Calculated relevance score:", finalScore);
+            console.log("AI Search: Calculated relevance score:", finalScore);
             
             return {
                 content: [
@@ -68,7 +68,7 @@ const handler = createMcpHandler(server => {
         }
     );
 
-    console.log("MCP server handlers initialized successfully");
+    console.log("AI Video Finder server handlers initialized successfully");
 }, {
     capabilities: {
         tools: {},

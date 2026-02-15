@@ -1,3 +1,4 @@
+// Type declarations for the AI-powered video search transport layer
 declare module '@modelcontextprotocol/sdk/client/http.js' {
   export class HttpClientTransport {
     constructor(options: { url: string });
