@@ -33,9 +33,17 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# secret / API key files
+api_youtube_v3_key.txt
+*.key
+*.secret
+
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# secrets
+api_youtube_v3_key.txt

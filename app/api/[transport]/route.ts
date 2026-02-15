@@ -1,5 +1,5 @@
 import { createMcpHandler } from "@vercel/mcp-adapter";
-import { string, object } from "zod";
+import { z } from "zod";
 
 const handler = createMcpHandler(server => {
     console.log("Initializing MCP server handlers...");
@@ -9,7 +9,7 @@ const handler = createMcpHandler(server => {
         "enhance-search",
         "Enhances a search query for better video results",
         {
-            query: string
+            query: z.string()
         },
         ({ query }) => {
             console.log("MCP: Received enhance-search request for query:", query);
@@ -31,8 +31,14 @@ const handler = createMcpHandler(server => {
         "analyze-relevance",
         "Analyzes the relevance of a video to a search query",
         {
-            video: object,
-            query: string
+            video: z.object({
+                snippet: z.object({
+                    title: z.string().optional(),
+                    description: z.string().optional(),
+                    tags: z.array(z.string()).optional(),
+                }).passthrough(),
+            }).passthrough(),
+            query: z.string()
         },
         ({ video, query }) => {
             console.log("MCP: Received analyze-relevance request for query:", query);
@@ -65,19 +71,10 @@ const handler = createMcpHandler(server => {
     console.log("MCP server handlers initialized successfully");
 }, {
     capabilities: {
-        tools: {
-            "enhance-search": {
-                description: "Enhances a search query for better video results"
-            },
-            "analyze-relevance": {
-                description: "Analyzes the relevance of a video to a search query"
-            }
-        },
+        tools: {},
     }
 }, {
     redisUrl: process.env.REDIS_URL,
-    sseEndpoint: "/sse",
-    streamableHttpEndpoint: "/mcp",
     verboseLogs: true,
     maxDuration: 60,
 });

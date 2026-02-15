@@ -1,9 +1,14 @@
 import { Button } from "@/components/ui/button";
-import { HeroSectionProps } from "@/types";
 import { Search, Loader2 } from "lucide-react";
 import { useState } from "react";
 
-const ChatInput = ({ search, setSearch, fetchData }: HeroSectionProps) => {
+interface ChatInputProps {
+  search: string;
+  setSearch: (search: string) => void;
+  fetchData: () => Promise<void>;
+}
+
+const ChatInput = ({ search, setSearch, fetchData }: ChatInputProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {

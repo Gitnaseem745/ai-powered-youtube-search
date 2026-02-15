@@ -1,6 +1,10 @@
 import { NextResponse } from 'next/server';
 
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
+
+if (!YOUTUBE_API_KEY) {
+  console.warn('YOUTUBE_API_KEY is not set in environment variables');
+}
 const YOUTUBE_API_URL = 'https://www.googleapis.com/youtube/v3/search';
 
 export async function POST(request: Request) {

@@ -3,20 +3,20 @@ import GradientBackground from "@/components/gradient-bg";
 import HeroSection from "@/components/hero";
 import Navigation from "@/components/navigation";
 import { useState } from "react";
+
 export default function Home() {
     const [search, setSearch] = useState<string>("");
     const [data, setData] = useState([]);
 
-    // data calling from api
-    const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
-    const type = "video";
-    const URL = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&q=${search}&part=snippet&maxResults=10&type=${type}&videoDuration=medium`
-
     const fetchData = async () => {
-        const response = await fetch(URL);
-        const data = await response.json();
-        setData(data.items);
-    }
+        const response = await fetch("/api/search", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ query: search }),
+        });
+        const result = await response.json();
+        setData(result.items ?? []);
+    };
 
   return (
     <GradientBackground>
